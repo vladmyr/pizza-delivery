@@ -1,0 +1,32 @@
+.btn-md {
+  padding-bottom: 9px;
+  padding-top: 9px;
+}
+.btn-product-to-cart {
+  width: 100%;
+}
+.btn-cart {
+  font-size: 16px;
+}
+.stepper .btn-stepper-arrow {
+  right: 0;
+  border-color: #93bf52;
+  background-color: #93bf52;
+  -webkit-user-select: none; /* webkit (safari, chrome) browsers */
+  -moz-user-select: none; /* mozilla browsers */
+  -khtml-user-select: none; /* webkit (konqueror) browsers */
+  -ms-user-select: none; /* IE10+ */
+}
+.stepper .btn-stepper-arrow:hover {
+  background-color: #a0d468;
+  border-color: #a0d468;
+}
+.btn-remove-item {
+  color: #da4453;
+  background: none;
+  padding: none;
+  border: none;
+}
+.btn-remove-item:hover {
+  color: #ed5565;
+}

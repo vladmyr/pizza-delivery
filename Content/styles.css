@@ -1,0 +1,192 @@
+html {
+  position: relative;
+  min-height: 100%;
+  height: 1px;
+}
+body {
+  background-color: #fff;
+  min-height: 100%;
+  padding-bottom: 70px;
+  position: relative;
+}
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 0;
+  background-color: #e6e9ed;
+}
+.full-width {
+  width: 100%;
+}
+.no-margin {
+  margin: 0;
+}
+.checkbox{ margin-left: 20px; }
+.navbar-default {
+  background-color: #93bf52;
+  border-color: #93bf52;
+  border-spacing: 0px;
+  border-radius: 0px;
+  box-shadow: rgba(0,0,0,0.2) 0px 1px 2px 0px;
+}
+.navbar-default .btn-link,
+.navbar-default .navbar-brand,
+.navbar-default .navbar-link,
+.navbar-default .navbar-nav>li>a,
+.navbar-default .navbar-text {
+  color: #fff;
+}
+.navbar-default .btn-link:hover,
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-link:hover,
+.navbar-default .navbar-nav>li>a:hover,
+.navbar-default .navbar-text:hover,
+.navbar-default .btn-link:focus,
+.navbar-default .navbar-brand:focus,
+.navbar-default .navbar-link:focus,
+.navbar-default .navbar-nav>li>a:focus,
+.navbar-default .navbar-text:focus {
+  background-color: #8db255;
+  color: #fff;
+}
+.navbar-default .navbar-nav>.open>a,
+.navbar-default .navbar-nav>.open>a:hover,
+.navbar-default .navbar-nav>.open>a:focus {
+  background-color: #8db255;
+  color: #fff;
+}
+.navbar-default .navbar-toggle,
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+  background-color: #93bf52;
+  border-color: #93bf52;
+}
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #fff;
+}
+.navbar-nav .open .dropdown-menu {
+  background-color: #fff;
+  border: 0;
+  box-shadow: rgba(0,0,0,0.2) 0px 1px 2px 0px;
+  padding: 15px;
+  max-width: 360px;
+}
+.navbar-default .navbar-nav .open .dropdown-menu>li>a {
+  color: #fff;
+}
+.navbar-default .navbar-nav .open .dropdown-menu>li>a:hover,
+.navbar-default .navbar-nav .open .dropdown-menu>li>a:focus {
+  background-color: #656d78;
+}
+.footer-navbar {
+  margin: 10px 0;
+}
+.footer-navbar>li {
+  padding: 0 10px;
+}
+.footer-navbar>li>a {
+  color: #9c9ea1;
+}
+.form-control-search {
+  border: 0;
+  border-radius: 2px;
+  padding: 6px;
+  height: 20px;
+  margin: 7px 0;
+  width: 300px;
+}
+.semantic-link {
+  font-weight: bold;
+  border-bottom-style: double;
+}
+.semantic-link:hover {
+  cursor: pointer;
+  color: #93bf52;
+  border-color: #93bf52;
+}
+.reference-concept-list,
+.reference-concept-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.product-wrapper {
+  padding-bottom: 15px;
+}
+.background-plate {
+  background-color: #fff;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border: 1px solid #efefef;
+  padding: 0 15px 15px 15px;
+}
+.product-item {
+  padding: 15px;
+}
+.product-image-wrapper {
+  position: relative;
+  margin: 15px;
+}
+.product-image {
+  margin: 0 auto;
+  background-size: contain;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+.product-pricelist {
+  margin-bottom: 10px;
+}
+.product-pricelist>tbody>tr>td,
+.product-pricelist>tbody>tr>th,
+.product-pricelist>tfoot>tr>td,
+.product-pricelist>tfoot>tr>th,
+.product-pricelist>thead>tr>td,
+.product-pricelist>thead>tr>th {
+  border-top: 0;
+  font-size: 12px;
+  padding: 6px;
+}
+.cart-products>tbody>tr>td,
+.cart-products>tbody>tr>th,
+.cart-products>tfoot>tr>td,
+.cart-products>tfoot>tr>th,
+.cart-products>thead>tr>td,
+.cart-products>thead>tr>th {
+  font-size: 14px;
+  line-height: 14px;
+  vertical-align: middle;
+  position: relative;
+}
+.cart-product-image {
+  height: 36px;
+}
+.cart-quantity {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: bold;
+  background-color: #fc6e51;
+  padding: 0 4px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+.stepper {
+  display: inline-block;
+  width: 50px;
+  position: relative;
+}
+.stepper-input {
+  padding: 0;
+  padding-left: 5px;
+  padding-right: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  height: 26px;
+}

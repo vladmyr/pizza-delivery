@@ -1,0 +1,19 @@
+<div class="container" ng-controller="IndexController">
+	<div class="col-sm-4 product-wrapper ng-cloak" ng-repeat="product in lstProduct">
+		<div class="product-item background-plate">
+			<img src="/img/default_pizza.png" class="product-image img-responsive" >
+			<div class="product-info">
+				<h3 class="text-center"><b>{{product.name}}</b></h3>
+				<p class="text-center">{{product.description}}</p>
+				<div class="product-order">
+					<table class="table product-pricelist">
+						<tr>
+							<td class="text-left">{{product.size}}cm</td><td class="text-center">{{product.weight}}g</td><td class="text-right">${{product.price}}</td>
+						</tr>
+					</table>
+					<button type="button" class="btn btn-success btn-product-to-cart" ng-click="addToCart(product.id)"><b>in box</b></button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

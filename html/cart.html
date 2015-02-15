@@ -1,0 +1,60 @@
+<div class="container" ng-controller="CartController" ng-init="initController()">
+	<div class="col-sm-12 background-plate">
+		<h4 class="">Your have ordered</h4>
+		<div ng-class="getTotalCartQuantity() === 0? 'hide' : ''">
+			<table class="table table-hover cart-products">
+				<tr ng-repeat="(key, value) in cart" ng-init="product=getProductById(key)">
+					<td class="text-left">
+						<button class="btn-remove-item" ng-click="delFromCart(key)"><span class="glyphicon glyphicon-remove"></span></button>
+					</td>
+					<td class="text-center">
+						{{product.name}}
+					</td>
+					<td class="text-center">
+						{{product.description}}
+					</td>
+					<td class="text-center">{{product.size}}sm</td>
+					<td class="text-center">{{product.weight}}g</td>
+					<td class="text-center">
+						<div class="stepper" ng-stepper>
+							<input type="text" class="form-control stepper-input"  min="1" max="10">
+							<span class="btn-stepper-arrow stepper-arrow up" data-input-stepper-increase>Up</span><span class="btn-stepper-arrow stepper-arrow down" data-input-stepper-decrease>Down</span>
+						</div>
+					</td>
+					<td class="text-right">
+						${{getCartItemPrice(key)}}
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4" class="text-right"><b>Total:</b></td>
+					<td class="text-center">{{getTotalCartWeight()}}g</td>
+					<td class="text-center">{{getTotalCartQuantity()}}</td>
+					<td class="text-right">${{getTotalCartPrice()}}</td>
+				</tr>
+			</table>
+			<div class="form-group">
+				<label for="customer-address">Delivery address</label>
+				<input type="text" class="form-control" ng-model="customerName" placeholder="Where should we deliver Your pizza?"/>
+			</div>
+			<div class="form-group">
+				<label for="customer-name">Name</label>
+				<input type="text" class="form-control" id="customer-name" placeholder="Enter Your name"/>
+			</div>
+			<div class="form-group">
+				<label for="customer-phone">Phone number</label>
+				<input type="text" class="form-control" id="customer-phone" placeholder="+38 XXX XXX XX XX"/>
+			</div>
+			<div class="row">
+				<div class="col-sm-3">
+					<a href="#/" type="button" class="btn btn-default btn-product-to-cart"><b>Add more pizza!</b></a>
+				</div>
+				<div class="col-sm-9">
+					<button type="button" class="btn btn-success btn-product-to-cart"><b>Confirm order!</b></button>
+				</div>
+			</div>
+		</div>
+		<div ng-class="getTotalCartQuantity() !== 0? 'hide' : ''">
+			<p>Your cart is empty! :( Feel free to look at our menu by clicking <a href="#/">here</a>.</p>
+		</div>
+	</div>
+</div>
