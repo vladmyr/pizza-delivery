@@ -7,18 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PizzaDelivery01.Checkout {
+namespace PizzaDelivery01.Administration {
     
     
-    public partial class CheckoutStart {
+    public partial class ProductManagement {
         
         /// <summary>
-        /// lstProduct control.
+        /// product control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListView lstProduct;
+        protected global::System.Web.UI.WebControls.FormView product;
     }
 }

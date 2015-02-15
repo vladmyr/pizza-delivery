@@ -41,9 +41,9 @@ namespace PizzaDelivery01.Data.Initializer
                     name = "Pizza Dzhamaykan Bombastic",
                     description = "Pineapple, Domino's sauce, Chicken, Jalapenos, Corn, Mozzarella, Pepper, Mushrooms",
                     size = 30,
-                    weight = 0,
+                    weight = 690,
                     imagePath = "",
-                    price = 29.99
+                    price = 99.99
                 },
                 new Product{
                     id = 4,

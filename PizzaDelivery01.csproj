@@ -174,7 +174,8 @@
     <Content Include="Account\ResetPasswordConfirmation.aspx" />
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyPhoneNumber.aspx" />
-    <Content Include="Checkout\CheckoutStart.aspx" />
+    <Content Include="Administration\ProductManagement.aspx" />
+    <Content Include="Administration\Products.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\buttons.css" />
     <Content Include="Content\styles.css" />
@@ -185,8 +186,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Account\Web.config" />
-    <Content Include="Checkout\Web.config" />
+    <Content Include="Account\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Administration\Web.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -388,6 +391,13 @@
     <Compile Include="Account\VerifyPhoneNumber.aspx.designer.cs">
       <DependentUpon>VerifyPhoneNumber.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Administration\ProductManagement.aspx.cs">
+      <DependentUpon>ProductManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\ProductManagement.aspx.designer.cs">
+      <DependentUpon>ProductManagement.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
@@ -400,12 +410,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Checkout\CheckoutStart.aspx.cs">
-      <DependentUpon>CheckoutStart.aspx</DependentUpon>
+    <Compile Include="Administration\Products.aspx.cs">
+      <DependentUpon>Products.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Checkout\CheckoutStart.aspx.designer.cs">
-      <DependentUpon>CheckoutStart.aspx</DependentUpon>
+    <Compile Include="Administration\Products.aspx.designer.cs">
+      <DependentUpon>Products.aspx</DependentUpon>
     </Compile>
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
