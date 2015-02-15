@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ProductManagement.aspx.cs" Inherits="PizzaDelivery01.Administration.ProductManagement" %>
+﻿<%@ Page Title="Product management" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ProductManagement.aspx.cs" Inherits="PizzaDelivery01.Administration.ProductManagement" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container" ng-controller="ProductManageController">
 	    <div class="col-sm-12 background-plate">
