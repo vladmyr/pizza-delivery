@@ -91,7 +91,14 @@
 						<li><a class="navbar-brand" href="/#/">PizzaDelivery!</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-                        <li><a runat="server" href="~/Account/Login">Sign in</a></li>
+					    <asp:LoginView runat ="server" ViewStateMode ="Disabled">
+					        <AnonymousTemplate>
+					            <li><a runat="server" href="~/Account/Login">Sign in</a></li>
+					        </AnonymousTemplate>
+                            <LoggedInTemplate>
+                                <li><a runat="server" href="#/"><span class="glyphicon glyphicon-user"></span> <b><%: Context.User.Identity.GetUserName() %></b></a></li>
+                            </LoggedInTemplate>
+                        </asp:LoginView>
 						<li>
 							<a href="/#/cart" class="btn-cart ng-cloak"><span class="glyphicon glyphicon-shopping-cart"></span><span ng-class="getCartTotalQuantity() === 0? 'hide' : 'cart-quantity'">{{getCartTotalQuantity()}}</span></a>
 						</li>

@@ -71,5 +71,10 @@ namespace PizzaDelivery01.Data.Repositories.Impl
             }
             return result;
         }
+
+        public bool saveAll()
+        {
+            return ctx.SaveChanges() > 0;
+        }
     }
 }

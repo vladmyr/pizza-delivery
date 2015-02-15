@@ -15,5 +15,6 @@ namespace PizzaDelivery01.Data.Repositories
         Product getProductById(int id);
         bool updateProduct(Product product);
         bool deleteProduct(int id);
+        bool saveAll();
     }
 }

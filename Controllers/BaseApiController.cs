@@ -6,15 +6,20 @@ using System.Net.Http;
 using System.Web.Http;
 using PizzaDelivery01.Data.Repositories;
 
-namespace PizzaDelivery01.Controllers
-{
-    public class BaseApiController : ApiController
-    {
+namespace PizzaDelivery01.Controllers {
+    public class BaseApiController : ApiController {
         private IProductRepository repository;
 
-        protected IProductRepository TheRepository
+        public BaseApiController(IProductRepository repo)
         {
-            get { return repository; }
+            repository = repo;
+        }
+
+        protected IProductRepository theRepository {
+            get {
+                return repository;
+            }
+
         }
     }
 }

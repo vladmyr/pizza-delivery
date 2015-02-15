@@ -13,19 +13,90 @@ using ProductContext = PizzaDelivery01.Entity.Context.ProductContext;
 
 namespace PizzaDelivery01.Controllers
 {
-    public class ProductController : ApiController
+    public class ProductController : BaseApiController
     {
-        private IProductRepository repository = new ProductRepository(new ProductContext());
-
-        public List<Product> Get()
+        public ProductController() : base(new ProductRepository(new ProductContext()))
         {
-            return repository.getAllProducts().ToList();
         }
 
-        public Product GetProduct(int id)
-        {
-            return repository.getProductById(id);
+        public HttpResponseMessage Get() {
+            return Request.CreateResponse(HttpStatusCode.OK, theRepository.getAllProducts().ToList());
         }
 
+        public HttpResponseMessage GetProduct(int id)
+        {
+            try
+            {
+                Product product = theRepository.getProductById(id);
+                if (product != null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, product);
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound);
+                }
+            }
+            catch(Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+
+        public HttpResponseMessage Post([FromBody] Product product)
+        {
+            try
+            {
+                if (theRepository.insertProduct(product) && theRepository.saveAll()) {
+                    return Request.CreateResponse(HttpStatusCode.Created, product);
+                } else {
+                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Could not save to the database.");
+                }   
+            }
+            catch(Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+
+        [HttpPatch]
+        [HttpPut]
+        public HttpResponseMessage Put([FromBody] Product product)
+        {
+            try
+            {
+                if (theRepository.updateProduct(product) && theRepository.saveAll())
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, product);
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotModified);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+
+        public HttpResponseMessage Delete(int id)
+        {
+            try
+            {
+                if (theRepository.deleteProduct(id) && theRepository.saveAll())
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK);
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.BadRequest);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
     }
 }
