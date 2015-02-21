@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
@@ -17,6 +18,11 @@ namespace PizzaDelivery01.App_Start
                 name: "Product",
                 routeTemplate: "api/product/{id}",
                 defaults: new { controller = "product", id = RouteParameter.Optional }
+            );
+            config.Routes.MapHttpRoute(
+                name: "MakeOrder",
+                routeTemplate: "api/order",
+                defaults: new { controller = "order", order = RouteParameter.Optional }
             );
 
             //JSON format responce

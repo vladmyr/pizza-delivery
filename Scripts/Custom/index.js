@@ -1,6 +1,6 @@
 ﻿console.log("index.js");
 
-var app = angular.module("app", ["ngRoute"]);
+var app = angular.module("app", ["ngRoute", "ui.utils.masks"]);
 app.config(function ($routeProvider) {
     $routeProvider
 		.when("/home", {
@@ -9,52 +9,36 @@ app.config(function ($routeProvider) {
 		.when("/cart", {
 		    templateUrl: "./html/cart.html"
 		})
-		.when("/login", {
-		    templateUrl: "./html/login.html"
+		.when("/success", {
+		    templateUrl: "./html/order_success.html"
 		})
-		.when("/signup", {
-		    templateUrl: "./html/registration.html"
-		})
-		.when("/orders", {
-		    templateUrl: "./html/orders.html"
-		})
-		.when("/orders/:orderId", {
-		    controller: "OrderController",
-		    templateUrl: "./html/order.html",
-		})
-		.when("/admin_products", {
-		    templateUrl: "./html/admin_products_view.html"
-		})
-		.when("/admin_product_manage/", {
-		    templateUrl: "./html/admin_product_manage.html"
-		})
-		.when("/admin_product_manage/:productId", {
-		    templateUrl: "./html/admin_product_manage.html"
-		})
-		.otherwise({
+        .when("/error", {
+            templateUrl: "./html/order_error.html"
+        })
+        .otherwise({
 		    redirectTo: "/home"
 		});
 });
-app.directive("ngStepper", function (CartFactory) {
+app.directive("ngStepper", function(CartFactory) {
     return {
         restrict: "A",
-        link: function (scope, element, attrs) {
+        link: function(scope, element, attrs) {
             $(element).inputStepper({
                 initialValue: scope.value
             });
-            $(element).on("increase", function (e, amount, plugin) {
+            $(element).on("increase", function(e, amount, plugin) {
                 scope.value += amount;
                 CartFactory.getCart()[scope.key] = scope.value;
                 scope.$apply();
             });
-            $(element).on("decrease", function (e, amount, plugin) {
+            $(element).on("decrease", function(e, amount, plugin) {
                 scope.value -= amount;
                 CartFactory.getCart()[scope.key] = scope.value;
                 scope.$apply();
             });
         }
     }
-})
+});
 app.factory("ProductListFactory", function ($http) {
     var lstProduct = [];   
 
@@ -91,8 +75,27 @@ app.factory("ProductListFactory", function ($http) {
         }
     }
 })
-app.factory("CartFactory", function (ProductListFactory) {
+app.factory("CartFactory", function ($http, ProductListFactory) {
     var cart = {};
+
+    function mapOrder(cartInfo) {
+        var order = {
+            id: 0,
+            name: cartInfo.name,
+            address: cartInfo.address,
+            phone: cartInfo.phone,
+            orderItems: [
+            ]
+        }
+
+        for (var key in cart) {
+            order.orderItems.push({ productId: key, quantity: cart[key] });
+        }
+
+        console.log(order);
+
+        return order;
+    }
 
     return {
         getCart: function () {
@@ -101,6 +104,9 @@ app.factory("CartFactory", function (ProductListFactory) {
         addToCart: function (id) {
             cart[id] ? cart[id]++ : cart[id] = 1;
             return true;
+        },
+        clearCart: function() {
+            cart = {};
         },
         delFromCart: function (id) {
             delete cart[id];
@@ -137,36 +143,30 @@ app.factory("CartFactory", function (ProductListFactory) {
                 totalWeight += cart[id] * ProductListFactory.getProductById(id).weight;
             });
             return totalWeight;
+        },
+        sendOrder: function (cartInfo, callback, callbackError) {
+            var request = {
+                method: "POST",
+                url: "/api/order",
+                data: JSON.stringify(mapOrder(cartInfo))
+            }
+            $http(request)
+                .success(function (data, status, headers, config) {
+                    console.log(data, status, headers, config);
+                    if (callback && typeof (callback) === "function") {
+                        callback(data);
+                    }
+                })
+                .error(function (data, status, headers, config) {
+                    console.log(data, status, headers, config);
+                    if (callbackError && typeof (callbackError) === "function") {
+                        callbackError(data);
+                    }
+                });
         }
     }
 });
-app.factory("OrderFactory", function (ProductListFactory) {
-    var lstOrder = [
-		{
-		    id: 0, name: "John Doe", address: "Address01", phone: "+380968112301", date: new Date(), isCompleted: false, arrOrderItem: {
-		        0: 2,
-		        1: 1
-		    }
-		},
-		{
-		    id: 1, name: "John Doe 02", address: "Address02", phone: "+380968112302", date: new Date(), isCompleted: false, arrOrderItem: {
-		        2: 1,
-		        1: 1
-		    }
-		},
-		{
-		    id: 2, name: "John Doe 03", address: "Address03", phone: "+380968112303", date: new Date(), isCompleted: false, arrOrderItem: {
-		        3: 2
-		    }
-		},
-		{
-		    id: 3, name: "John Doe 04", address: "Address04", phone: "+380968112304", date: new Date(), isCompleted: false, arrOrderItem: {
-		        1: 1,
-		        2: 1,
-		        3: 3
-		    }
-		}
-    ];
+app.factory("OrderFactory", function () {
     return {
         getLstOrder: function () {
             return lstOrder;
@@ -216,9 +216,17 @@ app.controller("CartController", function ($scope, ProductListFactory, CartFacto
     $scope.cart = CartFactory.getCart();
     $scope.cartTotalWeight = 0;
     $scope.cartTotalPrice = 0;
-
+    $scope.address = "";
+    $scope.name = "";
+    $scope.phone = "";
+    $scope.success = false;
+    $scope.error = false;
+    $scope.disabled = false;
+    
+    $scope.resetAll = function () {
+        CartFactory.clearCart();
+    }
     $scope.delFromCart = function (id) {
-        console.log("del " + id);
         CartFactory.delFromCart(id);
         return true;
     }
@@ -236,6 +244,25 @@ app.controller("CartController", function ($scope, ProductListFactory, CartFacto
     }
     $scope.getTotalCartWeight = function () {
         return CartFactory.getTotalWeight();
+    }
+    $scope.sendOrder = function () {
+        $scope.isDisabled = true;
+
+        CartFactory.sendOrder({
+            address: $scope.address,
+            name: $scope.name,
+            phone: $scope.phone
+        },
+        function () {
+            CartFactory.clearCart();
+            $scope.isDisabled = false;
+            $scope.success = true;
+        },
+        function () {
+            CartFactory.clearCart();
+            $scope.isDisabled = false;
+            $scope.error = true;
+        });
     }
 });
 app.controller("OrderController", function ($scope, $routeParams, OrderFactory, ProductListFactory) {

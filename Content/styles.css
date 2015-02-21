@@ -22,6 +22,16 @@ footer {
 .no-margin {
   margin: 0;
 }
+.required:after{
+    content: '*';
+    color: #d9534f;
+    padding-left: 2px;
+}
+.margin-15-0 {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.text-bold { font-weight: bold; }
 .checkbox{ margin-left: 20px; }
 .navbar-default {
   background-color: #93bf52;
@@ -65,18 +75,21 @@ footer {
 .navbar-default .navbar-toggle .icon-bar {
   background-color: #fff;
 }
-.navbar-nav .open .dropdown-menu {
-  background-color: #fff;
-  border: 0;
-  box-shadow: rgba(0,0,0,0.2) 0px 1px 2px 0px;
-  padding: 15px;
-  max-width: 360px;
+.navbar-default .navbar-nav .open .dropdown-menu > li > input[type=submit] {
+    padding: 5px 20px;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: 0;
 }
-.navbar-default .navbar-nav .open .dropdown-menu>li>a {
+.navbar-default .navbar-nav .open .dropdown-menu>li>a,
+.navbar-default .navbar-nav .open .dropdown-menu>li>input[type=submit] {
   color: #fff;
 }
 .navbar-default .navbar-nav .open .dropdown-menu>li>a:hover,
-.navbar-default .navbar-nav .open .dropdown-menu>li>a:focus {
+.navbar-default .navbar-nav .open .dropdown-menu>li>a:focus,
+.navbar-default .navbar-nav .open .dropdown-menu>li>input[type=submit]:hover,
+.navbar-default .navbar-nav .open .dropdown-menu>li>input[type=submit]:focus {
   background-color: #656d78;
 }
 .footer-navbar {

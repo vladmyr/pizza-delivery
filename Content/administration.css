@@ -1,0 +1,29 @@
+﻿.navbar-default {
+    background-color: #656D78;
+    border-color: #656D78;
+}
+.navbar-default .btn-link:hover,
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-link:hover,
+.navbar-default .navbar-nav>li>a:hover,
+.navbar-default .navbar-text:hover,
+.navbar-default .btn-link:focus,
+.navbar-default .navbar-brand:focus,
+.navbar-default .navbar-link:focus,
+.navbar-default .navbar-nav>li>a:focus,
+.navbar-default .navbar-text:focus {
+  background-color: #434A54;
+  color: #fff;
+}
+.navbar-default .navbar-nav>.open>a,
+.navbar-default .navbar-nav>.open>a:hover,
+.navbar-default .navbar-nav>.open>a:focus {
+  background-color: #434A54;
+  color: #fff;
+}
+.navbar-default .navbar-toggle,
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+  background-color: #434A54;
+  border-color: #434A54;
+}

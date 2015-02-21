@@ -13,8 +13,15 @@ namespace PizzaDelivery01.Data.Repositories
         bool insertProduct(Product product);
         IQueryable<Product> getAllProducts();
         Product getProductById(int id);
-        bool updateProduct(Product product);
+        bool addUpdateProduct(Product product);
         bool deleteProduct(int id);
-        bool saveAll();
+
+        IQueryable<Order> getAllOrders();
+        Order getOrderById(int id);
+        Order getOrderByIdWithItems(int id);
+        bool addUpdateOrder(Order order);
+
+        IQueryable<OrderItem> getOrderItemsByOrderId(int id);
+        bool addUpdateOrderItem(int orderId, OrderItem orderItem);
     }
 }

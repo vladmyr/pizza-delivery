@@ -16,12 +16,5 @@ namespace PizzaDelivery01
         {
 
         }
-
-        public IQueryable<Product> GetProducts()
-        {
-            var db = new ProductContext();
-            IQueryable<Product> query = db.Products;
-            return query;
-        }
     }
 }

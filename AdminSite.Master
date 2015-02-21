@@ -1,24 +1,24 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="PizzaDelivery01.SiteMaster" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="AdminSite.master.cs" Inherits="PizzaDelivery01.AdminSite" %>
 
 <!DOCTYPE html>
-
-<html lang="en" ng-app="app">
+<html lang="en">
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> | PizzaDelivery</title>
+    <title><%: Page.Title %> | PizzaDelivery Administration</title>
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
     <%--  %><webopt:bundlereference runat="server" path="~/Content/css" /> --%>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-    <link rel="stylesheet" href="./vendor/bootflatv2/css/bootstrap.min.css"/>
-	<link rel="stylesheet" href="./vendor/bootflatv2/css/site.min.css"/> 
-	<link rel="stylesheet" href="./vendor/bootflatv2/bootflat/css/bootflat.min.css"/>
+    <link rel="stylesheet" href="~/vendor/bootflatv2/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="~/vendor/bootflatv2/css/site.min.css"/> 
+	<link rel="stylesheet" href="~/vendor/bootflatv2/bootflat/css/bootflat.min.css"/>
     <%-- custom styles --%>
-    <link rel="stylesheet" href="./Content/styles.css">
-	<link rel="stylesheet" href="./Content/buttons.css">
+    <link rel="stylesheet" href="~/Content/styles.css">
+	<link rel="stylesheet" href="~/Content/buttons.css">
+    <link rel="stylesheet" href="~/Content/administration.css">
 </head>
 <body>
     <form runat="server">
@@ -44,7 +44,13 @@
         <nav class="navbar navbar-default" ng-controller="HeaderController">
 			<div class="container">
 					<ul class="nav navbar-nav navbar-left">
-						<li><a class="navbar-brand" href="/#/">PizzaDelivery!</a></li>
+					    <asp:LoginView runat ="server" ViewStateMode ="Disabled">
+					        <LoggedInTemplate>
+						        <li><a class="navbar-brand" href="/">PizzaDelivery!</a></li>
+                                <li><a runat="server" href="~/Administration/Products">Products</a></li>
+                                <li><a runat="server" href="~/Administration/Orders">Orders</a></li>
+                            </LoggedInTemplate>
+                        </asp:LoginView>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 					    <asp:LoginView runat ="server" ViewStateMode ="Disabled">
@@ -55,7 +61,8 @@
                                 <li class="dropdown">
                                     <a runat="server" class="dropdown-toggle btn-dropdown" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> <b><%: Context.User.Identity.GetUserName() %></b> <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-									    <li><a runat="server" href="~/Administration/Products">Administration</a></li>
+									    <li><a runat="server" href="~/Administration/Products">Products</a></li>
+                                        <li><a runat="server" href="~/Administration/Orders">Orders</a></li>
                                         <li>
                                             <asp:Button runat="server" OnClick="logOut_Click" Text="Log out"/>
                                         </li>
@@ -63,14 +70,13 @@
                                 </li>
                             </LoggedInTemplate>
                         </asp:LoginView>
-						<li>
-							<a href="/#/cart" class="btn-cart ng-cloak"><span class="glyphicon glyphicon-shopping-cart"></span><span ng-class="getCartTotalQuantity() === 0? 'hide' : 'cart-quantity'">{{getCartTotalQuantity()}}</span></a>
-						</li>
 					</ul>
 			</div>
 		</nav>
-
-        <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
+        
+        <div class="container">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
+        </div>
 
         <footer>
 			<div class="container">
@@ -86,11 +92,6 @@
 		<script type="text/javascript" src="/vendor/jquery/dist/jquery.min.js"></script>
 		<script type="text/javascript" src="/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="/vendor/input-stepper/jquery.input-stepper.min.js"></script>
-		<script type="text/javascript" src="/vendor/angular-input-masks/masks.js"></script>
-
-		<!-- custom scripts -->
-		<script type="text/javascript" src="/Scripts/Custom/index.js"></script>
-
     </form>
 </body>
 </html>

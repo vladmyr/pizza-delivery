@@ -8,7 +8,7 @@ using PizzaDelivery01.Entity.Context;
 
 namespace PizzaDelivery01.Data.Initializer
 {
-    public class ProductDatabaseInitializer : DropCreateDatabaseAlways<ProductContext>
+    public class ProductDatabaseInitializer : DropCreateDatabaseIfModelChanges<ProductContext>
     {
         protected override void Seed(ProductContext context)
         {

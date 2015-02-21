@@ -1,46 +1,60 @@
-﻿<%@ Page Title="Product management" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ProductManagement.aspx.cs" Inherits="PizzaDelivery01.Administration.ProductManagement" %>
+﻿<%@ Page Title="Product management" Language="C#" MasterPageFile="~/AdminSite.Master" AutoEventWireup="true" CodeBehind="ProductManagement.aspx.cs" Inherits="PizzaDelivery01.Administration.ProductManagement" %>
+<%@ Import Namespace="Microsoft.Owin" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="container" ng-controller="ProductManageController">
+    <div class="container">
 	    <div class="col-sm-12 background-plate">
 		    <h4>Product management</h4>
-            <asp:FormView ID="product" runat="server" ItemType="PizzaDelivery01.Entity.Product" SelectMethod="getProductById" RenderOuterTable="false">
+            <asp:PlaceHolder runat="server" ID="SuccessMessage" Visible="false">
+                <div class="alert alert-success alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <p class="text-success">
+                        <asp:Literal runat="server" ID="SuccessText" />
+                    </p>
+                </div>
+            </asp:PlaceHolder>
+            <asp:PlaceHolder runat="server" ID="ErrorMessage" Visible="false">
+                <div class="alert alert-danger">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <p class="text-danger">
+                        <asp:Literal runat="server" ID="FailureText" />
+                    </p>
+                </div>
+            </asp:PlaceHolder>
+            <asp:FormView ID="productForm" runat="server" ItemType="PizzaDelivery01.Entity.Product" SelectMethod="getProductById" RenderOuterTable="false">
                 <ItemTemplate>
                     <div class="form-group">
 			            <label>ID</label>
-			            <input type="text" class="form-control" value="<%#: Item.id %>" disabled/>
+                        <asp:TextBox ID="productId" runat="server" CssClass="form-control" value="<%#: Item.id %>" disabled></asp:TextBox>
 		            </div>
 		            <div class="form-group">
 			            <label>Name</label>
-			            <input type="text" class="form-control" value="<%#: Item.name %>"/>
+                        <asp:TextBox ID="productName" runat="server" CssClass="form-control" value="<%#: Item.name %>"></asp:TextBox>
 		            </div>
 		            <div class="form-group">
 			            <label>Description</label>
-			            <input type="text" class="form-control" value="<%#: Item.description %>"/>
+                        <asp:TextBox ID="productDescription" runat="server" CssClass="form-control" value="<%#: Item.description %>"></asp:TextBox>
 		            </div>
 		            <div class="form-group">
 			            <label>Size, sm</label>
-			            <input type="text" class="form-control" value="<%#: Item.size %>"/>
+                        <asp:TextBox ID="ProductSize" runat="server" CssClass="form-control" value="<%#: Item.size %>"></asp:TextBox>
 		            </div>
 		            <div class="form-group">
 			            <label>Weight, g</label>
-			            <input type="text" class="form-control" value="<%#: Item.weight %>"/>
+                        <asp:TextBox ID="productWeight" runat="server" CssClass="form-control" value="<%#: Item.weight %>"></asp:TextBox>
 		            </div>
 		            <div class="form-group">
 			            <label>Price, $</label>
-			            <input type="text" class="form-control" value="<%#: Item.price %>"/>
+                        <asp:TextBox ID="productPrice" runat="server" CssClass="form-control" value="<%#: Item.price %>"></asp:TextBox>
 		            </div>
 		            <div class="row">
-			            <div class="col-sm-3">
-				            <a href="/Administration/Products" class="btn btn-default full-width"><b>Back to Products</b></a>
+			            <div class="col-sm-4">
+				            <a runat="server" href="~/Administration/Products" class="btn btn-default full-width"><b>Back to Products</b></a>
 			            </div>
-			            <div class="col-sm-3">
-				            <button class="btn btn-default full-width" ng-click="resetProduct()"><b>Reset changes</b></button>
+			            <div class="col-sm-4">
+			                <asp:Button runat="server" ID="updateProductBtn"  Text="Save" CssClass="btn btn-success text-bold full-width" OnClick="createUpdateProduct_Click"/>
 			            </div>
-			            <div class="col-sm-3">
-				            <button class="btn btn-success full-width" ng-click="saveProcuct()"><b>Save changes</b></button>
-			            </div>
-			            <div class="col-sm-3">
-				            <a href="#" class="btn btn-warning full-width"><b>Delete product</b></a>
+			            <div class="col-sm-4">
+			                <asp:Button runat="server" ID="deleteProductBtn"  Text="Delete" CssClass="btn btn-warning text-bold full-width" OnClick="deleteProduct_Click"/>
 			            </div>
 		            </div>
                 </ItemTemplate>

@@ -174,9 +174,12 @@
     <Content Include="Account\ResetPasswordConfirmation.aspx" />
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyPhoneNumber.aspx" />
+    <Content Include="Administration\OrderDetails.aspx" />
+    <Content Include="Administration\Orders.aspx" />
     <Content Include="Administration\ProductManagement.aspx" />
     <Content Include="Administration\Products.aspx" />
     <Content Include="Contact.aspx" />
+    <Content Include="Content\administration.css" />
     <Content Include="Content\buttons.css" />
     <Content Include="Content\styles.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -190,6 +193,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Administration\Web.config" />
+    <Content Include="AdminSite.Master" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -225,6 +229,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Site.Master" />
+    <Content Include="vendor\angular-input-masks\masks.js" />
     <Content Include="vendor\angular-route\angular-route.min.js" />
     <Content Include="vendor\angularjs\angular.min.js" />
     <Content Include="vendor\bootflatv2\bootflat\css\bootflat.min.css" />
@@ -391,12 +396,33 @@
     <Compile Include="Account\VerifyPhoneNumber.aspx.designer.cs">
       <DependentUpon>VerifyPhoneNumber.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Administration\OrderDetails.aspx.cs">
+      <DependentUpon>OrderDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\OrderDetails.aspx.designer.cs">
+      <DependentUpon>OrderDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administration\Orders.aspx.cs">
+      <DependentUpon>Orders.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\Orders.aspx.designer.cs">
+      <DependentUpon>Orders.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Administration\ProductManagement.aspx.cs">
       <DependentUpon>ProductManagement.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Administration\ProductManagement.aspx.designer.cs">
       <DependentUpon>ProductManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminSite.Master.cs">
+      <DependentUpon>AdminSite.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminSite.Master.designer.cs">
+      <DependentUpon>AdminSite.Master</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
@@ -425,6 +451,7 @@
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
     <Compile Include="Controllers\BaseApiController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Data\Initializer\ProductDatabaseInitializer.cs" />
     <Compile Include="Data\Repositories\Impl\ProductRepository.cs" />

@@ -73,9 +73,16 @@ namespace PizzaDelivery01
 
         }
 
-        protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
+        protected void Unnamed_LoggingOut(object sender, EventArgs eventArgs)
         {
             Context.GetOwinContext().Authentication.SignOut();
+        }
+
+        public void logOut_Click(object sender, EventArgs eventArgs)
+        {
+            Context.GetOwinContext().Authentication.SignOut();
+            Session.Clear();
+            Response.Redirect("/");
         }
     }
 

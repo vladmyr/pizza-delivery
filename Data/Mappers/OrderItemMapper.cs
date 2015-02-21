@@ -18,9 +18,10 @@ namespace PizzaDelivery01.Mappers
             this.Property(o => o.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             this.Property(o => o.id).IsRequired();
 
-            this.Property(o => o.orderId).IsRequired();
             this.Property(o => o.productId).IsRequired();
             this.Property(o => o.quantity).IsRequired();
+
+            this.HasRequired<Order>(o => o.order).WithMany(or => or.OrderItems);
         }
     }
 }

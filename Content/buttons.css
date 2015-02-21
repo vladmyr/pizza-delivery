@@ -30,3 +30,4 @@
 .btn-remove-item:hover {
   color: #ed5565;
 }
+.btn-dropdown:hover { cursor: pointer; }
