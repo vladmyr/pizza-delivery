@@ -1,5 +1,5 @@
 # pizza-delivery
-This project was developing as a test task for Infopulse company.
+This project was developed as a test task for Infopulse company.
 
 List of technologies:
 - Server side: ASP.NET Webforms with WebAPI services;
