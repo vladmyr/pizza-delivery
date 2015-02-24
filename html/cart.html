@@ -1,4 +1,4 @@
-<div class="container" ng-controller="CartController" ng-init="initController()">
+<div class="container" ng-controller="CartController">
     <div class="col-sm-12 background-plate">
         <div ng-class="getTotalCartQuantity() === 0 && (!success || !error) ? 'hide' : ''">
             <h4>Your have ordered</h4>
@@ -32,26 +32,34 @@
                     <td class="text-right">${{getTotalCartPrice()}}</td>
                 </tr>
             </table>
-            <div class="form-group">
-                <label class="required" for="customer-address">Delivery address</label>
-                <input type="text" class="form-control" placeholder="Where should we deliver Your pizza?" ng-model="address" />
-            </div>
-            <div class="form-group">
-                <label class="required" for="customer-name">Name</label>
-                <input type="text" class="form-control" id="customer-name" placeholder="Enter Your name" ng-model="name" />
-            </div>
-            <div class="form-group">
-                <label class="required" for="customer-phone">Phone number</label>
-                <input type="text" class="form-control" id="customer-phone" placeholder="38 (XXX) XXX-XX-XX" ng-model="phone" ui-phone-number />
-            </div>
-            <div class="row">
-                <div class="col-sm-3">
-                    <a href="#/" type="button" class="btn btn-default btn-product-to-cart"><b>Add more pizza!</b></a>
+            <form>
+                <div class="form-group">
+                    <label class="required" for="customer-address">Delivery address</label>
+                    <input type="text" class="form-control" id="customer-address" placeholder="Where should we deliver Your pizza?" ng-model="address" required />
+                    <!--<div ng-class="address.$invalid ? 'popover bottom display-block' : 'hide'">
+                <div class="arrow"></div>
+                <div class="popover-content">
+                    <p>Error message</p>
                 </div>
-                <div class="col-sm-9">
-                    <button type="button" class="btn btn-success btn-product-to-cart" ng-click="sendOrder()" ng-disabled="{{isDisabled}}"><b>Confirm order!</b></button>
+            </div>-->
                 </div>
-            </div>
+                <div class="form-group">
+                    <label class="required" for="customer-name">Name</label>
+                    <input type="text" class="form-control" id="customer-name" placeholder="Enter Your name" ng-model="name" required />
+                </div>
+                <div class="form-group">
+                    <label class="required" for="customer-phone">Phone number</label>
+                    <input type="text" class="form-control" id="customer-phone" placeholder="38 (XXX) XXX-XX-XX" ng-model="phone" ui-phone-number required />
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <a href="#/" type="button" class="btn btn-default btn-product-to-cart"><b>Add more pizza!</b></a>
+                    </div>
+                    <div class="col-sm-9">
+                        <button type="button" class="btn btn-success btn-product-to-cart" ng-click="sendOrder()" ng-disabled="{{isDisabled}}"><b>Confirm order!</b></button>
+                    </div>
+                </div>
+            </form>
         </div>
         <div ng-class="getTotalCartQuantity() === 0 && !success && !error ? '' : 'hide'">
             <h4>Your have ordered</h4>
@@ -79,7 +87,8 @@
         </div>
         <div ng-class="error ? '' : 'hide'">
             <h4>Oops!</h4>
-            <p>We are sorry but an error occured while processing Your request :( <br /> Please try again later!</p>
+            <p>We are sorry but an error occured while processing Your request :( <br/> Please try again later!
+            </p>
         </div>
     </div>
 </div>

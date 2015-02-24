@@ -19,6 +19,44 @@ app.config(function ($routeProvider) {
 		    redirectTo: "/home"
 		});
 });
+//app.directive("ngForm", function() {
+//    return {
+//        scope: {},
+//        restrict: "A",
+//        controller: function($scope, $compile) {
+//            console.log("ngForm element");
+//        }
+//    }
+//});
+//app.directive("ngInputRequired", function() {
+//    return {
+//        restrict: "A",
+//        require: ["ngModel", "^ngForm"],
+//        link: function (scope, element, attrs, ctrl) {
+//            var regex = attrs.ngInputRequire || /^.*$/;
+
+//            //on change
+//            ctrl.$parsers.unshift(function (value) {
+//                var valid = regex.test(value);
+//                ctrl.$setValidity("ngInputRequired", valid);
+
+//                console.log(value, regex.test(value));
+
+//                return valid ? value : undefined;
+//            });
+
+//            ctrl.$formatters.unshift(function(value) {
+//                ctrl.$setValidity("ngInputRequired", regex.test(value));
+
+//                console.log(value, regex.test(value));
+
+//                return value;
+//            });
+
+//            console.log(scope, element, attrs);
+//        }
+//    }
+//});
 app.directive("ngStepper", function(CartFactory) {
     return {
         restrict: "A",

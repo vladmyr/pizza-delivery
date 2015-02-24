@@ -16,6 +16,9 @@ footer {
   padding: 0;
   background-color: #e6e9ed;
 }
+.display-block {
+    display: block;
+}
 .full-width {
   width: 100%;
 }
