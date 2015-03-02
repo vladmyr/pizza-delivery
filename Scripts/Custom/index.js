@@ -1,6 +1,6 @@
-﻿console.log("index.js");
+﻿var app = angular.module("app", ["ngRoute", "ui.utils.masks"]); //ui.utils.masks is used to add mask to phone form field
 
-var app = angular.module("app", ["ngRoute", "ui.utils.masks"]);
+//url mapping for single page web app
 app.config(function ($routeProvider) {
     $routeProvider
 		.when("/home", {
@@ -19,48 +19,10 @@ app.config(function ($routeProvider) {
 		    redirectTo: "/home"
 		});
 });
-//app.directive("ngForm", function() {
-//    return {
-//        scope: {},
-//        restrict: "A",
-//        controller: function($scope, $compile) {
-//            console.log("ngForm element");
-//        }
-//    }
-//});
-//app.directive("ngInputRequired", function() {
-//    return {
-//        restrict: "A",
-//        require: ["ngModel", "^ngForm"],
-//        link: function (scope, element, attrs, ctrl) {
-//            var regex = attrs.ngInputRequire || /^.*$/;
-
-//            //on change
-//            ctrl.$parsers.unshift(function (value) {
-//                var valid = regex.test(value);
-//                ctrl.$setValidity("ngInputRequired", valid);
-
-//                console.log(value, regex.test(value));
-
-//                return valid ? value : undefined;
-//            });
-
-//            ctrl.$formatters.unshift(function(value) {
-//                ctrl.$setValidity("ngInputRequired", regex.test(value));
-
-//                console.log(value, regex.test(value));
-
-//                return value;
-//            });
-
-//            console.log(scope, element, attrs);
-//        }
-//    }
-//});
-app.directive("ngStepper", function(CartFactory) {
+app.directive("ngStepper", function(CartFactory) { //custom directive to handle an particular items of one pizza
     return {
-        restrict: "A",
-        link: function(scope, element, attrs) {
+        restrict: "A", //match attribute
+        link: function(scope, element, attrs) { //link function manipulates with DOM
             $(element).inputStepper({
                 initialValue: scope.value
             });
@@ -77,6 +39,10 @@ app.directive("ngStepper", function(CartFactory) {
         }
     }
 });
+/*
+ * service factories used to store and manipulate with some data structures. 
+ * Here factories also used to pass data from one controller to another.
+ */
 app.factory("ProductListFactory", function ($http) {
     var lstProduct = [];   
 
@@ -85,7 +51,7 @@ app.factory("ProductListFactory", function ($http) {
             method: "GET",
             url: "/api/product"
         }
-        $http(request)
+        $http(request) //send async ajax repuest to webapi service
             .success(function (data, status, headers, config) {
                 if (callback && typeof (callback) === "function") {
                     callback(data);
@@ -107,6 +73,7 @@ app.factory("ProductListFactory", function ($http) {
             return lstProduct;
         },
         getProductById: function (id) {
+            //+id means call valueOf the id object. Basically this will convert id to an object of type Number
             return +id !== 0 ? lstProduct.filter(function (product) {
                 return product.id === +id;
             })[0] : {};
@@ -116,31 +83,35 @@ app.factory("ProductListFactory", function ($http) {
 app.factory("CartFactory", function ($http, ProductListFactory) {
     var cart = {};
 
+    //Internal factory function.
+    //Properly map data about the order before sending to the server
     function mapOrder(cartInfo) {
         var order = {
             id: 0,
             name: cartInfo.name,
             address: cartInfo.address,
             phone: cartInfo.phone,
-            orderItems: [
-            ]
+            orderItems: []
         }
 
         for (var key in cart) {
             order.orderItems.push({ productId: key, quantity: cart[key] });
         }
 
-        console.log(order);
-
         return order;
     }
 
+    //define methods of the factory
     return {
         getCart: function () {
             return cart;
         },
         addToCart: function (id) {
-            cart[id] ? cart[id]++ : cart[id] = 1;
+            /*
+             * if there is such kind of pizza in the cart, increase quantity by one
+             * otherwise add a new  kind of pizza and set it's quantity to 1 
+             */
+            cart[id] ? cart[id]++ : cart[id] = 1; 
             return true;
         },
         clearCart: function() {
@@ -188,15 +159,13 @@ app.factory("CartFactory", function ($http, ProductListFactory) {
                 url: "/api/order",
                 data: JSON.stringify(mapOrder(cartInfo))
             }
-            $http(request)
+            $http(request) //another ajax request
                 .success(function (data, status, headers, config) {
-                    console.log(data, status, headers, config);
                     if (callback && typeof (callback) === "function") {
                         callback(data);
                     }
                 })
                 .error(function (data, status, headers, config) {
-                    console.log(data, status, headers, config);
                     if (callbackError && typeof (callbackError) === "function") {
                         callbackError(data);
                     }
@@ -243,8 +212,6 @@ app.controller("IndexController", function ($scope, ProductListFactory, CartFact
     $scope.addToCart = function (id) {
         CartFactory.addToCart(id);
         $scope.cartTotal = CartFactory.getTotalItems();
-        console.log($scope.cart, CartFactory.getTotalItems());
-        console.log(ProductListFactory.getProductById(id));
         return true;
     }
 });
